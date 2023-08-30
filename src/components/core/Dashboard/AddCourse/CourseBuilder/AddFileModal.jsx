@@ -11,13 +11,16 @@ import {
 import { setCourse } from "../../../../../slices/courseSlice"
 import IconBtn from "../../../../Common/IconBtn"
 import Upload from "../Upload"
+import FileUpload from "../FileUpload";
 
-export default function SubSectionModal({
+
+export default function AddFileModal({
   modalData,
   setModalData,
   add = false,
   view = false,
   edit = false,
+  file = true
 }) {
   const {
     register,
@@ -129,7 +132,7 @@ export default function SubSectionModal({
         {/* Modal Header */}
         <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
           <p className="text-xl font-semibold text-richblack-5">
-            {view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture
+            {view && "Viewing"} {add && "Adding"} {edit && "Editing"} {file && "Adding File For"} Lecture
           </p>
           <button onClick={() => (!loading ? setModalData(null) : {})}>
             <RxCross2 className="text-2xl text-richblack-5" />
@@ -141,20 +144,19 @@ export default function SubSectionModal({
           className="space-y-8 px-8 py-10"
         >
           {/* Lecture Video Upload */}
-          <Upload
+          <FileUpload
             name="lectureVideo"
-            label="Lecture Video / File"
+            label="Upload File"
             register={register}
             setValue={setValue}
             errors={errors}
-            video={true}
             viewData={view ? modalData.videoUrl : null}
             editData={edit ? modalData.videoUrl : null}
           />
           {/* Lecture Title */}
           <div className="flex flex-col space-y-2">
             <label className="text-sm text-richblack-5" htmlFor="lectureTitle">
-              Lecture Title {!view && <sup className="text-pink-200">*</sup>}
+              File Title {!view && <sup className="text-pink-200">*</sup>}
             </label>
             <input
               disabled={view || loading}
@@ -165,14 +167,14 @@ export default function SubSectionModal({
             />
             {errors.lectureTitle && (
               <span className="ml-2 text-xs tracking-wide text-pink-200">
-                Lecture title is required
+                File title is required
               </span>
             )}
           </div>
           {/* Lecture Description */}
           <div className="flex flex-col space-y-2">
             <label className="text-sm text-richblack-5" htmlFor="lectureDesc">
-              Lecture Description{" "}
+              File Description{" "}
               {!view && <sup className="text-pink-200">*</sup>}
             </label>
             <textarea
@@ -184,7 +186,7 @@ export default function SubSectionModal({
             />
             {errors.lectureDesc && (
               <span className="ml-2 text-xs tracking-wide text-pink-200">
-                Lecture Description is required
+                File Description is required
               </span>
             )}
           </div>

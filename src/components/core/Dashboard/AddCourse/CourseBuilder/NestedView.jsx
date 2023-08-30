@@ -13,13 +13,15 @@ import {
 import { setCourse } from "../../../../../slices/courseSlice"
 import ConfirmationModal from "../../../../Common/ConfirmationModal"
 import SubSectionModal from "./SubSectionModal"
+import AddFileModal from "./AddFileModal"
 
 export default function NestedView({ handleChangeEditSectionName }) {
   const { course } = useSelector((state) => state.course)
   const { token } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
-  // States to keep track of mode of modal [add, view, edit]
+  // States to keep track of mode of modal [add, view, edit,file]
   const [addSubSection, setAddSubsection] = useState(null)
+  const [addFile, setaddFile] = useState(null)
   const [viewSubSection, setViewSubSection] = useState(null)
   const [editSubSection, setEditSubSection] = useState(null)
   // to keep track of confirmation modal
@@ -140,13 +142,22 @@ export default function NestedView({ handleChangeEditSectionName }) {
                 </div>
               ))}
               {/* Add New Lecture to Section */}
-              <button
-                onClick={() => setAddSubsection(section._id)}
-                className="mt-3 flex items-center gap-x-1 text-yellow-50"
-              >
-                <FaPlus className="text-lg" />
-                <p>Add Lecture</p>
-              </button>
+              <div className="flex gap-10 items-center">
+                <button
+                  onClick={() => setAddSubsection(section._id)}
+                  className="mt-3 flex items-center gap-x-1 text-yellow-50"
+                >
+                  <FaPlus className="text-lg" />
+                  <p>Add Lecture</p>
+                </button>
+                <button
+                  onClick={() => setaddFile(section._id)}
+                  className="mt-3 flex items-center gap-x-1 text-yellow-50"
+                >
+                  <FaPlus className="text-lg" />
+                  <p>Add File</p>
+                </button>
+              </div>
             </div>
           </details>
         ))}
@@ -173,6 +184,12 @@ export default function NestedView({ handleChangeEditSectionName }) {
       ) : (
         <></>
       )}
+      {addFile ? (
+        <AddFileModal
+          modalData={addFile}
+          setModalData={setaddFile}
+          file={true}
+        />) : (<></>)}
       {/* Confirmation Modal */}
       {confirmationModal ? (
         <ConfirmationModal modalData={confirmationModal} />

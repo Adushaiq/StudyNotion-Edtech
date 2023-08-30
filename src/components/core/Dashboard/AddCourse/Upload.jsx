@@ -33,19 +33,37 @@ export default function Upload({
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: !video
-      ? { "image/*": [".jpeg", ".jpg", ".png"] }
+      ? { "image/*": [".jpeg", ".jpg", ".png", ".pdf", ".zip"] } // Allow images, PDFs, and zip files
       : { "video/*": [".mp4"] },
     onDrop,
-  })
+  });
+  
 
   const previewFile = (file) => {
-    // console.log(file)
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
+  if (file.type.startsWith("image")) {
+    // For images
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result)
-    }
+      setPreviewSource(reader.result);
+    };
+  } else if (file.type === "application/pdf") {
+    // For PDF files
+    setPreviewSource(file.name);
+  } else if (file.type === "application/zip") {
+    // For zip files (You might want to show a placeholder image for zip files)
+    setPreviewSource("/path/to/zip-placeholder-image.png");
+  } else if (file.type.startsWith("video")) {
+    // For videos
+    setPreviewSource(null); // Clear preview for videos
+  } else {
+    // For other file types (e.g., documents)
+    setPreviewSource(file.name); // Set preview source to filename
   }
+};
+
+  
+  
 
   useEffect(() => {
     register(name, { required: true })
