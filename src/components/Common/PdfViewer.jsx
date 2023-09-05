@@ -10,7 +10,7 @@ const PdfViewer = ({ pdfUrl }) => {
     <div className="w-full h-[70vh] flex justify-center items-center">
     
       <button onClick={downloadPdf} className="bg-yellow-50 p-4 rounded-lg text-black font-bold hover:bg-yellow-200">
-        DOWNLOAD FILE
+        DOWNLOAD PDF
       </button>
     </div>
   );

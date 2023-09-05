@@ -22,7 +22,7 @@ export default function FileUpload({
       setValue(name, file); // Set the file object to the form value
     }
   };
-
+  
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: [".pdf", ".zip"], // Only accept PDF and zip files
     onDrop,

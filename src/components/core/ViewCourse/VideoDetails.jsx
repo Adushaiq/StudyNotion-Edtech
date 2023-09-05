@@ -9,9 +9,8 @@ import { BigPlayButton, Player } from "video-react"
 import { markLectureAsComplete } from "../../../services/operations/courseDetailsAPI"
 import { updateCompletedLectures } from "../../../slices/viewCourseSlice"
 import IconBtn from "../../Common/IconBtn"
-import PdfViewer from "../../Common/PdfViewer" 
+import PdfViewer from "../../Common/PdfViewer"
 import ZipViewer from "../../Common/ZIpViewer"
-
 
 const VideoDetails = () => {
   const { courseId, sectionId, subSectionId } = useParams()
@@ -29,22 +28,26 @@ const VideoDetails = () => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    (async () => {
-      if (!courseSectionData?.length) return;
+    ;(async () => {
+      if (!courseSectionData?.length) return
       if (!courseId || !sectionId || !subSectionId) {
-        navigate(`/dashboard/enrolled-courses`);
+        navigate(`/dashboard/enrolled-courses`)
       } else {
-        const filteredData = courseSectionData?.filter((course) => course._id === sectionId);
+        const filteredData = courseSectionData?.filter(
+          (course) => course._id === sectionId
+        )
         if (filteredData && filteredData.length > 0) {
-          const filteredVideoData = filteredData[0]?.subSection.filter((data) => data._id === subSectionId);
+          const filteredVideoData = filteredData[0]?.subSection.filter(
+            (data) => data._id === subSectionId
+          )
           if (filteredVideoData && filteredVideoData.length > 0) {
-            setVideoData(filteredVideoData[0]);
+            setVideoData(filteredVideoData[0])
           }
         }
-        setPreviewSource(courseEntireData?.thumbnail);
-        setVideoEnded(false);
+        setPreviewSource(courseEntireData?.thumbnail)
+        setVideoEnded(false)
       }
-    })();
+    })()
     console.log(videoData)
   }, [courseSectionData, courseEntireData, location.pathname])
 
@@ -169,6 +172,9 @@ const VideoDetails = () => {
     setLoading(false)
   }
 
+  const isZipFile = videoData?.videoUrl?.startsWith("data:application/zip");
+
+
 
   return (
     <div className="mt-7 flex flex-col gap-5 text-white">
@@ -181,10 +187,8 @@ const VideoDetails = () => {
       ) : videoData?.videoUrl?.endsWith(".pdf") ? (
         // If the videoUrl is a PDF, render the PDF viewer
         <PdfViewer pdfUrl={videoData.videoUrl} />
-      ) : videoData?.videoUrl?.endsWith(".zip") ? (
+      ) : videoData?.videoUrl?.endsWith(".mp4") ? (
         // If the videoUrl is a ZIP file, render the ZIP viewer
-        <ZipViewer zipUrl={videoData.videoUrl} />
-      ) : (
         <Player
           ref={playerRef}
           aspectRatio="16:9"
@@ -245,10 +249,14 @@ const VideoDetails = () => {
             </div>
           )}
         </Player>
+      ) : (
+        <ZipViewer zipUrl={videoData?.videoUrl} fileName="downloaded.zip" />
       )}
 
-      <h1 className="mt-4 text-2xl lg:text-3xl font-semibold">{videoData?.title}</h1>
-      <p className="text-sm lg:text-lg pt-2 pb-6">{videoData?.description}</p>
+      <h1 className="mt-4 text-2xl font-semibold lg:text-3xl">
+        {videoData?.title}
+      </h1>
+      <p className="pb-6 pt-2 text-sm lg:text-lg">{videoData?.description}</p>
     </div>
   )
 }
