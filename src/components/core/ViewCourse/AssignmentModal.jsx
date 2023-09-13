@@ -1,15 +1,6 @@
-import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
 import { RxCross2 } from "react-icons/rx"
-import ReactStars from "react-rating-stars-component"
 import { useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-
-import {
-  createRating,
-  submitAssignment,
-} from "../../../services/operations/courseDetailsAPI"
-import IconBtn from "../../Common/IconBtn"
+import {submitAssignment} from "../../../services/operations/courseDetailsAPI"
 import AssignmentForm from "./AssignmentForm"
 
 export default function AssignmentModal({ setAssignmentModal }) {
@@ -17,9 +8,9 @@ export default function AssignmentModal({ setAssignmentModal }) {
   const { token } = useSelector((state) => state.auth)
 
   const onSubmit = async (data) => {
-    console.log("data: ", data)
+    
     const response = await submitAssignment(data, token)
-    console.log(response) // You can access data.assignmentNumber, data.pdfFile, and data.zipFile
+    
     setAssignmentModal(false)
   }
   return (
