@@ -20,6 +20,7 @@ import MyProfile from "./components/core/Dashboard/MyProfile"
 import Settings from "./components/core/Dashboard/Settings"
 import ViewSubmissions from "./components/core/Dashboard/ViewSubmissions"
 import VideoDetails from "./components/core/ViewCourse/VideoDetails"
+import ChatBot from "./components/Common/ChatBot"
 import About from "./pages/About"
 import Catalog from "./pages/Catalog"
 import Contact from "./pages/Contact"
@@ -53,6 +54,9 @@ function App() {
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
       <Navbar />
+      
+      <ChatBot/>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -160,7 +164,7 @@ function App() {
 
         {/* 404 Page */}
         <Route path="*" element={<Error />} />
-      </Routes>
+      </Routes>  
     </div>
   )
 }
