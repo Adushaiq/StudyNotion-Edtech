@@ -94,7 +94,7 @@ const ChatBot = () => {
           </div>
 
           <form onSubmit={handleSubmit(handleOnSubmit)}>
-            <div className="fixed bottom-0 flex border-t-2 border-richblack-900 py-3 w-full items-center gap-2 pl-5 md:px-3">
+            <div className="fixed bottom-0 flex border-t-2 z-50 bg-richblack-800 border-richblack-900 py-3 w-full items-center gap-2 pl-5 md:px-3">
               <input
                 type="text"
                 className="border-gray-300 h-[40px] w-[350px] rounded-lg border-none px-2 focus:outline-none"
