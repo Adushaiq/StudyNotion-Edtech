@@ -37,7 +37,7 @@ function ReviewSlider() {
 
   return (
     <div className="text-white w-full ">
-      <div className="my-[50px] h-[184px] max-w-maxContent lg:max-w-maxContent">
+      <div className="lg:my-[50px] h-[184px] max-w-maxContent ">
         <Swiper
           slidesPerView={1}
           spaceBetween={25}
@@ -48,13 +48,13 @@ function ReviewSlider() {
             disableOnInteraction: false,
           }}
           modules={[FreeMode, Pagination, Autoplay]}
-          className="w-full "
+          className="w-full"
         >
           {reviews.map((review, i) => {
             return (
               <SwiperSlide key={i} >
-                <div className="flex flex-col gap-3 w-full mx-auto lg:w-[400px] justify-center min-h-[170px] bg-richblack-800 p-3 text-[18px] text-richblack-25">
-                  <div className="flex items-center justify-center gap-4">
+                <div className="flex flex-col gap-3 w-full mx-auto lg:w-[400px] justify-center min-h-[170px] bg-richblack-800 p-3 py-5 text-[18px] text-richblack-25 rounded-lg">
+                  <div className="flex items-center px-4 justify-center gap-4">
                     <img
                       src={
                         review?.user?.image
@@ -71,7 +71,7 @@ function ReviewSlider() {
                       </h2>
                     </div>
                   </div>
-                  <p className="font-medium text-richblack-25 text-center">
+                  <p className="font-medium text-richblack-25 text-center lg:text-xl">
                     {review?.review.split(" ").length > truncateWords
                       ? `${review?.review
                           .split(" ")
@@ -86,7 +86,7 @@ function ReviewSlider() {
                     <ReactStars
                       count={5}
                       value={review.rating}
-                      size={20}
+                      size={30}
                       edit={false}
                       activeColor="#ffd700"
                       emptyIcon={<FaStar />}

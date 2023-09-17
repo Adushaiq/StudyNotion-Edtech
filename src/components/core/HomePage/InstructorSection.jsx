@@ -12,11 +12,11 @@ const InstructorSection = () => {
             <img
               src={Instructor}
               alt=""
-              className="shadow-white shadow-[-20px_-20px_0_0]"
+              className="shadow-white lg:shadow-[-20px_-20px_0_0] shadow-[-5px_-5px_0_0]"
             />
           </div>
-          <div className="lg:w-[50%] flex gap-10 flex-col">
-            <h1 className="lg:w-[50%] text-4xl font-semibold ">
+          <div className="lg:w-[50%] flex lg:gap-10 gap-5 flex-col">
+            <h1 className="lg:w-[50%] lg:text-4xl text-3xl font-semibold ">
               Become an
               <HighlightText text={"instructor"} />
             </h1>

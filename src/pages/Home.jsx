@@ -55,9 +55,9 @@ function Home() {
         </div>
 
         {/* Video */}
-        <div className="mx-3 my-7 shadow-[10px_-5px_50px_-5px] shadow-blue-200">
+        <div className="lg:mx-3 lg:my-7  ">
           <video
-            className="shadow-[20px_20px_rgba(255,255,255)]"
+            className="lg:rounded-xl rounded-lg shadow-md shadow-black "
             muted
             loop
             autoPlay
@@ -101,7 +101,7 @@ function Home() {
           <CodeBlocks
             position={"lg:flex-row-reverse"}
             heading={
-              <div className="w-[100%] text-4xl font-semibold lg:w-[50%]">
+              <div className="w-[100%] text-4xl font-semibold lg:w-[50%] lg:mt-0 -mt-[100px]">
                 Start
                 <HighlightText text={"coding in seconds"} />
               </div>
@@ -152,7 +152,7 @@ function Home() {
         <div className="mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 ">
           {/* Job that is in Demand - Section 1 */}
           <div className="mb-10 mt-[-100px] flex flex-col justify-between gap-7 lg:mt-20 lg:flex-row lg:gap-0">
-            <div className="text-4xl font-semibold lg:w-[45%] ">
+            <div className="text-4xl font-semibold lg:w-[45%] lg:mt-0 -mt-[100px] ">
               Get the skills you need for a{" "}
               <HighlightText text={"job that is in demand."} />
             </div>
@@ -177,15 +177,15 @@ function Home() {
       </div>
 
       {/* Section 3 */}
-      <div className="relative mx-auto my-20 flex w-11/12  lg:max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
+      <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
         {/* Become a instructor section */}
         <InstructorSection />
 
         {/* Reviws from Other Learner */}
-        <h1 className="text-center text-4xl font-semibold mt-8">
+        <h1 className="text-center lg:text-4xl text-3xl font-semibold lg:mt-8 mt-4">
           Reviews from other learners
         </h1>
-        <ReviewSlider  />
+        <ReviewSlider />
       </div>
 
       {/* Footer */}
