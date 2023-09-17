@@ -16,13 +16,14 @@ function Catalog() {
   const { loading } = useSelector((state) => state.profile)
   const { catalogName } = useParams()
   const [active, setActive] = useState(1)
-  const [catalogPageData, setCatalogPageData] = useState(null)
+  const [CatalogPageData, setCatalogPageData] = useState(null)
   const [categoryId, setCategoryId] = useState("")
   // Fetch All Categories
   useEffect(() => {
     ;(async () => {
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
+
         const category_id = res?.data?.data?.filter(
           (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
         )[0]._id
@@ -38,6 +39,7 @@ function Catalog() {
         try {
           const res = await getCatalogPageData(categoryId)
           setCatalogPageData(res)
+          console.log(res)
         } catch (error) {
           console.log(error)
         }
@@ -45,14 +47,14 @@ function Catalog() {
     }
   }, [categoryId])
 
-  if (loading || !catalogPageData) {
+  if (loading || !CatalogPageData) {
     return (
       <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
         <div className="spinner"></div>
       </div>
     )
   }
-  if (!loading && !catalogPageData.success) {
+  if (!loading && !CatalogPageData.success) {
     return <Error />
   }
 
@@ -60,18 +62,18 @@ function Catalog() {
     <>
       {/* Hero Section */}
       <div className=" box-content bg-richblack-800 px-4">
-        <div className="mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ">
+        <div className="mx-auto flex lg:min-h-[260px] min-h-[180px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ">
           <p className="text-sm text-richblack-300">
             {`Home / Catalog / `}
             <span className="text-yellow-25">
-              {catalogPageData?.data?.selectedCategory?.name}
+              {CatalogPageData?.data?.selectedCategory?.name}
             </span>
           </p>
-          <p className="text-3xl text-richblack-5">
-            {catalogPageData?.data?.selectedCategory?.name}
+          <p className="lg:text-3xl text-xl font-semibold text-richblack-5">
+            {CatalogPageData?.data?.selectedCategory?.name}
           </p>
-          <p className="max-w-[870px] text-richblack-200">
-            {catalogPageData?.data?.selectedCategory?.description}
+          <p className="lg:max-w-[870px] text-richblack-200">
+            {CatalogPageData?.data?.selectedCategory?.description}
           </p>
         </div>
       </div>
@@ -103,18 +105,18 @@ function Catalog() {
         </div>
         <div>
           <Course_Slider
-            Courses={catalogPageData?.data?.selectedCategory?.courses}
+            Courses={CatalogPageData?.data?.selectedCategory?.courses}
           />
         </div>
       </div>
       {/* Section 2 */}
       <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
         <div className="section_heading">
-          Top courses in {catalogPageData?.data?.differentCategory?.name}
+          Top courses in {CatalogPageData?.data?.differentCategory?.name}
         </div>
         <div className="py-8">
           <Course_Slider
-            Courses={catalogPageData?.data?.differentCategory?.courses}
+            Courses={CatalogPageData?.data?.differentCategory?.courses}
           />
         </div>
       </div>
@@ -123,13 +125,18 @@ function Catalog() {
       <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
         <div className="section_heading">Frequently Bought</div>
         <div className="py-8">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            {catalogPageData?.data?.mostSellingCourses
+          {/* <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            {CatalogPageData?.data?.mostSellingCourses
               ?.slice(0, 4)
               .map((course, i) => (
-                <Course_Card course={course} key={i} Height={"h-[400px]"} />
+                <Course_Card course={course} key={i} Height={"h-[250px]"} />
               ))}
-          </div>
+          </div> */}
+           <div>
+          <Course_Slider
+            Courses={CatalogPageData?.data?.mostSellingCourses}
+          />
+        </div>
         </div>
       </div>
 

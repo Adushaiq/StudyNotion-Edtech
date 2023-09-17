@@ -77,7 +77,7 @@ const TimelineSection = () => {
           <img
             src={TimeLineImage}
             alt="timelineImage"
-            className="shadow-white shadow-[20px_20px_0px_0px] object-cover h-[400px] lg:h-fit"
+            className="lg:shadow-white lg:shadow-[20px_20px_0px_0px] object-cover h-[400px] lg:h-fit"
           />
         </div>
       </div>
