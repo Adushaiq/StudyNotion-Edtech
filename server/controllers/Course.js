@@ -20,6 +20,9 @@ exports.createCourse = async (req, res) => {
       price,
       tag: _tag,
       category,
+      year,
+      department,
+      courseLevel,
       status,
       instructions: _instructions,
     } = req.body
@@ -42,6 +45,7 @@ exports.createCourse = async (req, res) => {
       !tag.length ||
       !thumbnail ||
       !category ||
+      !courseLevel ||
       !instructions.length
     ) {
       return res.status(400).json({
@@ -87,6 +91,9 @@ exports.createCourse = async (req, res) => {
       price,
       tag,
       category: categoryDetails._id,
+      year,
+      department,
+      courseLevel,
       thumbnail: thumbnailImage.secure_url,
       status: status,
       instructions,
