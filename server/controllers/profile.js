@@ -41,11 +41,7 @@ exports.updateProfile = async (req, res) => {
     // Find the updated user details
     const updatedUserDetails = await User.findById(id)
       .populate("additionalDetails")
-<<<<<<< HEAD
       .populate("studentDetails")
-=======
-      .populate("studentDetails")
->>>>>>> 3000fb2961d7dfee247504bf8e5ae241e6a6f0a9
       .exec()
 
     return res.json({
