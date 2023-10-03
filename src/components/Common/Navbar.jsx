@@ -169,14 +169,14 @@ function Navbar() {
         </button>
 
         {isMenuOpen && (
-          <div className="fixed inset-0 z-[1000] bg-white bg-opacity-10 backdrop-blur-sm transition-all duration-300 ease-in-out">
-            <div className="fixed right-0 top-0 z-50 flex h-[100vh] w-[70%] flex-col items-start gap-10 bg-richblack-900 pl-10 text-richblack-100 transition-all duration-300 ease-linear">
+          <div className="fixed inset-0 z-[1000] bg-white bg-opacity-10 backdrop-blur-sm">
+            <div className="fixed right-0 top-0 z-50 flex h-[100vh] w-[70%] flex-col items-start gap-10 bg-richblack-900 pl-10 text-richblack-100 transition-all  duration-300 ease-linear">
               <AiOutlineClose
                 onClick={handleNavBtn}
                 className="absolute right-8 top-4 h-6 w-6"
               />
 
-              <div className="flex items-center translate-y-40 justify-evenly gap-5">
+              <div className="flex translate-y-40 justify-evenly gap-5">
                 {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
                   <Link
                     to="/dashboard/cart"
@@ -206,26 +206,15 @@ function Navbar() {
                   </Link>
                 )}
                 {token !== null && (
-                  <div
-                    className="flex gap-4 items-center" 
-                    onClick={handleNavBtn}>
-                      <img
-                        onClick={() => {
-                          navigate("/dashboard/my-profile")
-                        }}
-                        src={user?.image}
-                        alt={`profile-${user?.firstName}`}
-                        className="aspect-square w-[35px] rounded-full object-cover"
-                      />
-                      <div 
-                        onClick={() => {
-                          navigate("/dashboard/my-profile")
-                        }}>
-                          <h2>
-                            {user?.firstName}  {user?.lastName}
-                          </h2>
-                          <p className="text-xs">View Profile</p>
-                      </div>
+                  <div onClick={handleNavBtn}>
+                    <img
+                      onClick={() => {
+                        navigate("/dashboard/my-profile")
+                      }}
+                      src={user?.image}
+                      alt={`profile-${user?.firstName}`}
+                      className="aspect-square w-[30px] rounded-full object-cover"
+                    />
                   </div>
                 )}
               </div>
@@ -267,7 +256,7 @@ function Navbar() {
                                               .split(" ")
                                               .join("-")
                                               .toLowerCase()}`}
-                                            className="border-b-[1px] text-yellow-100  border-richblack-100  bg-transparent  pb-1 "
+                                            className="border-b-[1px] text-yellow-100 border-richblack-100  bg-transparent  pb-1 "
                                             key={i}
                                             onClick={handleNavBtn}
                                           >
@@ -299,24 +288,26 @@ function Navbar() {
                 })}
               </ul>
 
-              <button
-                onClick={() =>
-                  setConfirmationModal({
-                    text1: "Are you sure?",
-                    text2: "You will be logged out of your account.",
-                    btn1Text: "Logout",
-                    btn2Text: "Cancel",
-                    btn1Handler: () => dispatch(logout(navigate)),
-                    btn2Handler: () => setConfirmationModal(null),
-                  })
-                }
-                className="translate-y-40 text-sm font-medium text-richblack-300"
-              >
-                <div className="flex items-center gap-x-2">
-                  <VscSignOut className="text-2xl" />
-                  <span>Logout</span>
-                </div>
-              </button>
+              {token &&
+                <button
+                  onClick={() =>
+                    setConfirmationModal({
+                      text1: "Are you sure?",
+                      text2: "You will be logged out of your account.",
+                      btn1Text: "Logout",
+                      btn2Text: "Cancel",
+                      btn1Handler: () => dispatch(logout(navigate)),
+                      btn2Handler: () => setConfirmationModal(null),
+                    })
+                  }
+                  className="translate-y-40 text-sm font-medium text-richblack-300"
+                >
+                  <div className="flex items-center gap-x-2">
+                    <VscSignOut className="text-2xl" />
+                    <span>Logout</span>
+                  </div>
+                </button>
+              }  
               {confirmationModal && (
                 <ConfirmationModal modalData={confirmationModal} />
               )}
