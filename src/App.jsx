@@ -37,6 +37,7 @@ import VerifyEmail from "./pages/VerifyEmail"
 import ViewCourse from "./pages/ViewCourse"
 import { getUserDetails } from "./services/operations/profileAPI"
 import { ACCOUNT_TYPE } from "./utils/constants"
+import StudentsDetailsForm from "./pages/StudentDetailsForm"
 
 function App() {
   const dispatch = useDispatch()
@@ -54,7 +55,7 @@ function App() {
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
       <Navbar />
-      
+
       <ChatBot/>
 
       <Routes>
@@ -114,6 +115,8 @@ function App() {
         >
           {/* Route for all users */}
           <Route path="dashboard/my-profile" element={<MyProfile />} />
+          <Route path="dashboard/StudentForm" element={<StudentsDetailsForm />} />
+
           <Route path="dashboard/Settings" element={<Settings />} />
           {/* Route only for Instructors */}
           {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
@@ -164,7 +167,7 @@ function App() {
 
         {/* 404 Page */}
         <Route path="*" element={<Error />} />
-      </Routes>  
+      </Routes>
     </div>
   )
 }

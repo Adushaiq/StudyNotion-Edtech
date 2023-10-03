@@ -76,3 +76,8 @@ export const settingsEndpoints = {
 export const chatEndpoints = {
   GET_MESSAGE_API: BASE_URL + "/chat/chatBox"
 }
+export const studentFormEndpoint = {
+  ADDSTUDENTFORM_API: BASE_URL + "/profile/addStudentDetails",
+  GETSTUDENTFORM_API: BASE_URL + "/profile/getStudentsDetails",
+
+}
