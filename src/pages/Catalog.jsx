@@ -119,7 +119,7 @@ function Catalog() {
         </div>
         <div>
           {selectedCategoryByUser === "SPPU Syllabus" &&
-          user.accountType === "Student" ? (
+          user?.accountType === "Student" ? (
             <Course_Slider Courses={matchingCourses} />
           ) : (
             <Course_Slider Courses={courses} />
