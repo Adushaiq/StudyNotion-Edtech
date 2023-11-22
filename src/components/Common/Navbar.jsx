@@ -5,6 +5,7 @@ import {
   AiOutlineShoppingCart,
 } from "react-icons/ai"
 import { BsChevronDown } from "react-icons/bs"
+import { FaSearch } from "react-icons/fa";
 import { VscSignOut } from "react-icons/vsc"
 import { useDispatch, useSelector } from "react-redux"
 import {
@@ -147,6 +148,11 @@ function Navbar() {
               )}
             </Link>
           )}
+          <Link to="/searchpage">
+            <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[12px] text-richblack-100">
+              <FaSearch />
+            </button>
+          </Link>
           {token === null && (
             <Link to="/login">
               <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
@@ -167,7 +173,9 @@ function Navbar() {
         <button className="mr-4 md:hidden">
           <AiOutlineMenu onClick={handleNavBtn} fontSize={24} fill="#AFB2BF" />
         </button>
+        
 
+        {/* mobile menu */}
         {isMenuOpen && (
           <div className="fixed inset-0 z-[1000] bg-white bg-opacity-10 backdrop-blur-sm">
             <div className="fixed right-0 top-0 z-50 flex h-[100vh] w-[70%] flex-col items-start gap-10 bg-richblack-900 pl-10 text-richblack-100 transition-all  duration-300 ease-linear">

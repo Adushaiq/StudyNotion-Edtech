@@ -1,8 +1,12 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 // Define the Courses schema
 const coursesSchema = new mongoose.Schema({
-  courseName: { type: String },
+  courseName: {
+    type: String,
+    required: true,
+    text: true, // This enables text indexing for courseName
+  },
   courseDescription: { type: String },
   instructor: {
     type: mongoose.Schema.Types.ObjectId,
@@ -43,10 +47,10 @@ const coursesSchema = new mongoose.Schema({
     type: String,
   },
   department: {
-    type: String
+    type: String,
   },
   courseLevel: {
-    type: String
+    type: String,
   },
   studentsEnroled: [
     {
@@ -69,7 +73,10 @@ const coursesSchema = new mongoose.Schema({
     enum: ["Draft", "Published"],
   },
   createdAt: { type: Date, default: Date.now },
-})
+});
+
+// Enable text index on courseName
+coursesSchema.index({ courseName: "text" });
 
 // Export the Courses model
-module.exports = mongoose.model("Course", coursesSchema)
+module.exports = mongoose.model("Course", coursesSchema);

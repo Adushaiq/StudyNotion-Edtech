@@ -23,7 +23,8 @@ const {
   CREATE_RATING_API,
   LECTURE_COMPLETION_API,
   SUBMIT_ASSIGNMENT_API,
-  GET_ALL_ASSIGNMENT_API
+  GET_ALL_ASSIGNMENT_API,
+  SEARCH_COURSES_API
 } = courseEndpoints
 
 export const getAllCourses = async () => {
@@ -441,3 +442,26 @@ export const getAllAssignments = async (courseId, token) => {
   toast.dismiss(toastId)
   return result
 }
+
+
+export const searchCourse = async (searchQuery) => {
+  let result = null;
+  console.log("Get All course for the search query: ", searchQuery);
+  const toastId = toast.loading("Searching...");
+
+  try {
+    const response = await apiConnector("GET", SEARCH_COURSES_API, null, null, { searchQuery });
+    console.log("SEARCH_COURSES_API RESPONSE............", response);
+
+    // if (!response.data.message) {
+    //   throw new Error(response.data.error);
+    // }
+    result = response;
+  } catch (error) {
+    console.log("SEARCH_COURSES_API ERROR............", error);
+    toast.error(error.message);
+  }
+  toast.dismiss(toastId);
+  return result;
+};
+

@@ -504,3 +504,37 @@ exports.deleteCourse = async (req, res) => {
     })
   }
 }
+
+// search courses
+exports.searchCourse = async (req, res) => {
+  try {
+    const { searchQuery } = req.query; // Change here to extract from req.query
+
+    if (typeof searchQuery !== 'string') {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid search query",
+      });
+    }
+
+    const courses = await Course.find({ $text: { $search: searchQuery } }).populate("instructor").exec();
+
+    console.log("Courses: ", courses);
+
+    if (courses){
+      return res.status(200).json({
+        success: true,
+        message: "Course Fetched successfully",
+        courses: courses,
+      });
+    }
+    
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};

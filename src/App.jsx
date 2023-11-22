@@ -20,6 +20,7 @@ import MyProfile from "./components/core/Dashboard/MyProfile"
 import Settings from "./components/core/Dashboard/Settings"
 import ViewSubmissions from "./components/core/Dashboard/ViewSubmissions"
 import VideoDetails from "./components/core/ViewCourse/VideoDetails"
+import SearchPage from "./components/core/SearchPage/SearchPage"
 import ChatBot from "./components/Common/ChatBot"
 import About from "./pages/About"
 import Catalog from "./pages/Catalog"
@@ -64,6 +65,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="courses/:courseId" element={<CourseDetails />} />
         <Route path="catalog/:catalogName" element={<Catalog />} />
+        <Route path="/searchpage" element={<SearchPage />} />
         {/* Open Route - for Only Non Logged in User */}
         <Route
           path="login"
