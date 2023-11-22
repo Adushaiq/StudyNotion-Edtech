@@ -508,7 +508,7 @@ exports.deleteCourse = async (req, res) => {
 // search courses
 exports.searchCourse = async (req, res) => {
   try {
-    const { searchQuery } = req.query; // Change here to extract from req.query
+    const { searchQuery } = req.query;
 
     if (typeof searchQuery !== 'string') {
       return res.status(400).json({
@@ -517,18 +517,32 @@ exports.searchCourse = async (req, res) => {
       });
     }
 
-    const courses = await Course.find({ $text: { $search: searchQuery } }).populate("instructor").exec();
+    const courses = await Course.find({ $text: { $search: searchQuery } })
+      .populate("instructor")
+      .populate("ratingAndReviews")
+      .exec();
+
+    courses.sort((a, b) => {
+      const avgRatingA = calculateAverageRating(a.ratingAndReviews);
+      const avgRatingB = calculateAverageRating(b.ratingAndReviews);
+      return avgRatingB - avgRatingA;
+    });
 
     console.log("Courses: ", courses);
 
-    if (courses){
+    if (courses.length < 1) {
+      return res.status(200).json({
+        success: true,
+        message: `No Courses found for ${searchQuery}`,
+        courses: courses,
+      });
+    } else {
       return res.status(200).json({
         success: true,
         message: "Course Fetched successfully",
         courses: courses,
       });
     }
-    
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -538,3 +552,14 @@ exports.searchCourse = async (req, res) => {
     });
   }
 };
+
+// Helper function to calculate average rating
+function calculateAverageRating(ratingAndReviews) {
+  if (!ratingAndReviews || ratingAndReviews.length === 0) {
+    return 0;
+  }
+
+  const totalRating = ratingAndReviews.reduce((sum, review) => sum + review.rating, 0);
+  return totalRating / ratingAndReviews.length;
+}
+
