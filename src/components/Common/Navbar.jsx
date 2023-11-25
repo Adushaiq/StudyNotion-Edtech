@@ -174,14 +174,14 @@ function Navbar() {
 
         {/* mobile menu */}
           
-        <div className="flex items-center gap-2">
+        <div className="visible md:hidden flex items-center gap-2">
           <Link to="/searchpage">
-              <button className="visible lg:hidden rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+              <button className=" rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
                 <FaSearch />
               </button>
           </Link>
 
-          <button className="mr-4 md:hidden">
+          <button className="mr-4">
             <AiOutlineMenu onClick={handleNavBtn} fontSize={24} fill="#AFB2BF" />
           </button>
         </div>  
@@ -194,7 +194,7 @@ function Navbar() {
                 className="absolute right-8 top-4 h-6 w-6"
               />
 
-              <div className="flex translate-y-40 justify-evenly gap-5">
+              <div className="flex translate-y-14 justify-evenly gap-5">
                 {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
                   <Link
                     to="/dashboard/cart"
@@ -237,7 +237,7 @@ function Navbar() {
                 )}
               </div>
 
-              <ul className="flex translate-y-40 flex-col gap-3 text-left text-lg text-richblack-100">
+              <ul className="flex translate-y-14 flex-col gap-3 text-left text-lg text-richblack-100">
                 {NavbarLinks.map((link, index) => {
                   return (
                     <div key={index}>
@@ -318,7 +318,7 @@ function Navbar() {
                       btn2Handler: () => setConfirmationModal(null),
                     })
                   }
-                  className="translate-y-40 text-sm font-medium text-richblack-300"
+                  className="translate-y-14 text-sm font-medium text-richblack-300"
                 >
                   <div className="flex items-center gap-x-2">
                     <VscSignOut className="text-2xl" />

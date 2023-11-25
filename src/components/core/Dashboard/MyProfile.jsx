@@ -119,14 +119,14 @@ export default function MyProfile() {
           </div>
         </div>
       </div>
-      {user.accountType === "Student" && !user.submittedStudentDetails &&
+      {user.accountType === "Student" &&
         <div className="my-4 lg:my-10 flex flex-col gap-y-4 lg:gap-y-10 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-4 lg:px-12">
           <div className="flex w-full items-center justify-between">
             <p className="text-lg font-semibold text-richblack-5">Set Preferences</p>
             <IconBtn
               text="Edit"
               onclick={() => {
-                navigate("/dashboard/StudentForm")
+                navigate("/dashboard/student-form")
               }}
             >
               <RiEditBoxLine />

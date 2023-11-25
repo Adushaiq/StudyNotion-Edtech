@@ -1,8 +1,9 @@
 const StudentDetails = require("../models/StudentDetails")
+const User = require("../models/User")
 
 exports.addStudentDetails = async(request, response) => {
     try{
-        const {studentDetailsId='' ,age='', experience='', interest='', learn='', spendTime='', year='', department=''} = request.body
+        const {studentDetailsId='' ,age='', experience='', interest='', learn='', spendTime='', year='', department='', userId} = request.body
         if(!studentDetailsId || !age || !experience || !interest || !learn || !spendTime || !year || !department){
             return response.status(500).json({
                 success: false,
@@ -18,7 +19,9 @@ exports.addStudentDetails = async(request, response) => {
         student.year = year
         student.department = department
 
-
+        const user = await User.findByIdAndUpdate(userId)
+        user.submittedStudentDetails = true
+        await user.save()
 
         await student.save()    
         if(student){

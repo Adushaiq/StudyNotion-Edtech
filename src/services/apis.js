@@ -80,5 +80,4 @@ export const chatEndpoints = {
 export const studentFormEndpoint = {
   ADDSTUDENTFORM_API: BASE_URL + "/profile/addStudentDetails",
   GETSTUDENTFORM_API: BASE_URL + "/profile/getStudentsDetails",
-
 }

@@ -218,9 +218,14 @@ exports.getAllCourses = async (req, res) => {
         instructor: true,
         ratingAndReviews: true,
         studentsEnrolled: true,
+        category: true,
+        year: true,
+        department: true,
+        courseLevel: true,
       }
     )
       .populate("instructor")
+      .populate("category")
       .exec()
 
     return res.status(200).json({

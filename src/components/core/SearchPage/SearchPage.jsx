@@ -23,7 +23,6 @@ const SearchPage = () => {
         }
         let sortedResults = response.data.courses;
 
-        // Sort the results based on the selected option
         if (sortOption === "priceHigh") {
           sortedResults = sortedResults.sort((a, b) => b.price - a.price);
         } else if (sortOption === "priceLow") {
@@ -61,14 +60,13 @@ const SearchPage = () => {
           placeholder="Search for courses..."
         />
 
-        {/* Dropdown for sorting options */}
-        <div className="absolute right-0 text-sm -bottom-10  p-2 rounded">
+        <div className="absolute -right-2 text-sm -bottom-22 p-2 rounded">
           <label className="pr-2" htmlFor="sortOption">Sort:</label>
           <select
             id="sortOption"
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
-            style={{ color: "black" }} 
+            className="ml-2 p-2 border rounded bg-richblack-900 border-richblack-800 mb-10 px-2" 
           >
             <option value="default">Default</option>
             <option value="priceHigh">Price - High to Low</option>

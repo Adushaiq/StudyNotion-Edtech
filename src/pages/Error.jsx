@@ -31,7 +31,7 @@ function Error() {
           <Lottie animationData={errorAnimation} />
         </div>
         <p className="lg:text-3xl text-xl font-bold text-center text-white">
-          The page you are looking for is currently under development.
+          The page you are looking for is not available.
         </p>
       </div>
     </Section>

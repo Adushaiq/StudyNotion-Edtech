@@ -14,18 +14,22 @@ const StudentsDetailsForm = () => {
     formState: { errors },
   } = useForm()
   const { user } = useSelector((state) => state.profile)
+  const userId = user._id
+
   const navigate = useNavigate()
   const onSubmit = async (data) => {
     const StudentDetailsId = user?.studentDetails
 
     data.studentDetailsId = StudentDetailsId
+    data.userId = userId
+    
     console.log(data)
     const toastId = toast.loading("Loading...")
     try {
       const res = await apiConnector(
         "POST",
         studentFormEndpoint.ADDSTUDENTFORM_API,
-        data
+        data, 
       )
       console.log(res)
 
