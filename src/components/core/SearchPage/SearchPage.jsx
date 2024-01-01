@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { searchCourse } from "../../../services/operations/courseDetailsAPI";
+import {searchCourse } from "../../../services/operations/courseDetailsAPI";
 import { Link } from "react-router-dom";
+import RatingStars from "../../Common/RatingStars";
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,7 +23,7 @@ const SearchPage = () => {
           throw new Error(`Request failed with status: ${response.status}`);
         }
         let sortedResults = response.data.courses;
-
+        console.log(sortedResults, "printing result");
         if (sortOption === "priceHigh") {
           sortedResults = sortedResults.sort((a, b) => b.price - a.price);
         } else if (sortOption === "priceLow") {
@@ -30,6 +31,11 @@ const SearchPage = () => {
         } else if (sortOption === "date") {
           sortedResults = sortedResults.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         }
+        else if (sortOption === "Top") {
+          sortedResults = sortedResults.sort((a, b) => a.ratingAndReviews[0]?.rating - b.ratingAndReviews[0]?.rating);
+        }
+
+
 
         setSearchResults(sortedResults);
       } catch (error) {
@@ -40,6 +46,8 @@ const SearchPage = () => {
     },
     [sortOption]
   );
+
+
 
   useEffect(() => {
     clearTimeout(debounceTimeout.current);
@@ -66,12 +74,13 @@ const SearchPage = () => {
             id="sortOption"
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
-            className="ml-2 p-2 border rounded bg-richblack-900 border-richblack-800 mb-10 px-2" 
+            className="ml-2 p-2 border rounded bg-richblack-900 border-richblack-800 mb-10 px-2"
           >
             <option value="default">Default</option>
             <option value="priceHigh">Price - High to Low</option>
             <option value="priceLow">Price - Low to High</option>
             <option value="date">Latest</option>
+            <option value="Top">Top Courses</option>
           </select>
         </div>
       </div>
@@ -97,6 +106,11 @@ const SearchPage = () => {
                     <p>Instructor - {course.instructor.firstName + " " + course.instructor.lastName}</p>
                     <p>Students Enrolled - {course.studentsEnroled.length}</p>
                     <p>Price - &#8377;{course.price}</p>
+                    <div className="flex">
+                      <p>Rating-</p>
+                      <RatingStars Review_Count={course.ratingAndReviews[0]?.rating} Star_Size={24} />
+                    </div>
+
                   </div>
                 </li>
               </Link>
