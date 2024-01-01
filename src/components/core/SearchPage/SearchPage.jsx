@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import {searchCourse } from "../../../services/operations/courseDetailsAPI";
+import { searchCourse } from "../../../services/operations/courseDetailsAPI";
 import { Link } from "react-router-dom";
 import RatingStars from "../../Common/RatingStars";
 
@@ -23,21 +23,22 @@ const SearchPage = () => {
           throw new Error(`Request failed with status: ${response.status}`);
         }
         let sortedResults = response.data.courses;
-        console.log(sortedResults, "printing result");
         if (sortOption === "priceHigh") {
           sortedResults = sortedResults.sort((a, b) => b.price - a.price);
         } else if (sortOption === "priceLow") {
           sortedResults = sortedResults.sort((a, b) => a.price - b.price);
         } else if (sortOption === "date") {
           sortedResults = sortedResults.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        }
-        else if (sortOption === "Top") {
+        } else if (sortOption === "Top") {
           sortedResults = sortedResults.sort((a, b) => a.ratingAndReviews[0]?.rating - b.ratingAndReviews[0]?.rating);
         }
 
 
 
         setSearchResults(sortedResults);
+
+        // Store the search results in localStorage
+        localStorage.setItem("searchResults", JSON.stringify(sortedResults));
       } catch (error) {
         console.error("Error fetching search results:", error);
       } finally {
@@ -50,6 +51,18 @@ const SearchPage = () => {
 
 
   useEffect(() => {
+    // Retrieve the search results from localStorage on component mount
+    const storedResults = JSON.parse(localStorage.getItem("searchResults"));
+    if (storedResults) {
+      setSearchResults(storedResults);
+    }
+
+    // Retrieve the search query from localStorage on component mount
+    const storedSearchQuery = localStorage.getItem("searchQuery");
+    if (storedSearchQuery) {
+      setSearchQuery(storedSearchQuery);
+    }
+
     clearTimeout(debounceTimeout.current);
     debounceTimeout.current = setTimeout(() => {
       debouncedSearch(searchQuery);
@@ -57,6 +70,13 @@ const SearchPage = () => {
     return () => clearTimeout(debounceTimeout.current);
   }, [searchQuery, debouncedSearch]);
 
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+
+    // Store the search query in localStorage
+    localStorage.setItem("searchQuery", value);
+  };
   return (
     <div className="flex flex-col items-center lg:mx-auto my-8 text-white">
       <div className="relative">
@@ -64,7 +84,7 @@ const SearchPage = () => {
           className="text-black border p-2 w-[350px] lg:w-[850px] rounded mx-auto"
           type="text"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={handleInputChange}
           placeholder="Search for courses..."
         />
 
