@@ -168,7 +168,7 @@ export default function VideoDetailsSidebar({ setReviewModal, setAssignmentModal
         <IconBtn
           text="Submit Assignment"
           customClasses={`w-[300px] justify-center mx-auto ${
-            videoSidebarActive ? "flex md:hidden fixed bottom-10 left-14" : "hidden"
+            videoSidebarActive ? "flex md:hidden mt-10" : "hidden"
           } `}  
           onclick={() => setAssignmentModal(true)}
         />
