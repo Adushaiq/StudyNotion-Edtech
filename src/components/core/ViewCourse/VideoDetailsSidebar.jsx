@@ -56,18 +56,11 @@ export default function VideoDetailsSidebar({ setReviewModal, setAssignmentModal
         } w-[50px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 lg:w-[320px] lg:max-w-[350px]`}
       >
         {videoSidebarActive ? (
-          <TbLayoutSidebarRightExpand
-            onClick={activateVideoSidebar}
-            className={`static mb-5 text-4xl text-richblack-100 md:hidden ${
-              videoSidebarActive ? "translate-x-4" : "translate-x-2"
-            } translate-x-2 translate-y-6`}
-          />
+          <></>
         ) : (
           <TbLayoutSidebarLeftExpand
             onClick={activateVideoSidebar}
-            className={`static mb-5 text-4xl text-richblack-100 md:hidden ${
-              videoSidebarActive ? "translate-x-4" : "translate-x-2"
-            } translate-x-2 translate-y-6`}
+            className={`static mb-5 text-4xl text-richblack-100 md:hidden translate-x-2  translate-y-6`}
           />
         )}
 
@@ -76,21 +69,28 @@ export default function VideoDetailsSidebar({ setReviewModal, setAssignmentModal
             videoSidebarActive ? "flex" : "hidden"
           } flex-col items-start justify-between gap-2 gap-y-4 border-b border-richblack-600 py-5 text-lg font-bold text-richblack-25 transition-all duration-1000 ease-in-out lg:flex`}
         >
+          
           <div className="flex w-full items-center justify-between ">
             <div
               onClick={() => {
                 navigate(`/dashboard/enrolled-courses`)
               }}
-              className="flex h-[35px] w-[35px] items-center justify-center rounded-full bg-richblack-100 text-richblack-700 hover:scale-90 lg:p-1"
+              className="hidden md:flex h-[35px] w-[35px] items-center justify-center rounded-full bg-richblack-100 text-richblack-700 hover:scale-90 hover:cursor-pointer lg:p-1"
               title="back"
             >
               <IoIosArrowBack size={30} />
             </div>
-            <IconBtn
-              text="Add Review"
-              customClasses="ml-auto"
-              onclick={() => setReviewModal(true)}
-            />
+            <div className="flex items-center justify-between w-full">
+              <TbLayoutSidebarRightExpand
+                onClick={activateVideoSidebar}
+                className={`static mb-5 text-4xl text-richblack-100 md:hidden -translate-x-1 translate-y-2`}
+              /> 
+              <IconBtn
+                text="Add Review"
+                customClasses="ml-auto"
+                onclick={() => setReviewModal(true)}
+              />
+            </div>
           </div>
           <div className="flex flex-col">
             <p>{courseEntireData?.courseName}</p>
@@ -167,7 +167,14 @@ export default function VideoDetailsSidebar({ setReviewModal, setAssignmentModal
 
         <IconBtn
           text="Submit Assignment"
-          customClasses="w-[200px] flex justify-center mx-auto fixed bottom-10 left-14 "
+          customClasses={`w-[300px] justify-center mx-auto ${
+            videoSidebarActive ? "flex md:hidden fixed bottom-10 left-14" : "hidden"
+          } `}  
+          onclick={() => setAssignmentModal(true)}
+        />
+        <IconBtn
+          text="Submit Assignment"
+          customClasses={`w-[200px] justify-center mx-auto hidden md:flex fixed bottom-10 left-14 `}  
           onclick={() => setAssignmentModal(true)}
         />
 
