@@ -15,7 +15,7 @@ function Sppu_Course_Card({ course, Height }) {
   return (
     <>
       <Link to={`/courses/${course._id}`}>
-        <div className="max-w-[130px] mx-auto lg:mr-11 lg:max-w-[360px]">
+        <div className="max-w-[130px] mx-auto lg:max-w-[330px]">
           <div className="rounded-lg">
             <img
               src={course?.thumbnail}

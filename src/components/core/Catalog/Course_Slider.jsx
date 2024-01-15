@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react"
-// Import Swiper React components
+import React from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
-
-// Import Swiper styles
 import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
-// import "../../.."
-// Import required modules
 import { Autoplay, FreeMode, Pagination } from "swiper"
-
-// import { getAllCourses } from "../../services/operations/courseDetailsAPI"
 import Course_Card from "./Course_Card"
 
 function Course_Slider({ Courses }) {

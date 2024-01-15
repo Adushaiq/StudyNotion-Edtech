@@ -84,7 +84,7 @@ const Sppu = () => {
                         All Sppu Course's
                     </h2>
                     {/* Department Filter Dropdown */}
-                    <div>
+                    <div className='flex items-center justify-between max-w-[90%]'>
                         <select
                             value={selectedDepartment}
                             onChange={(e) => setSelectedDepartment(e.target.value)}
@@ -111,7 +111,7 @@ const Sppu = () => {
                         </select>
                     </div>
                 </div>
-                <div className="mb-20 max-w-[88%] lg:max-w-[100%] justify-between mx-auto flex flex-wrap gap-9">
+                <div className="mb-20 max-w-[95%] lg:max-w-[100%] justify-between mx-auto flex flex-wrap gap-8">
                     {filterCourses().map((course, i) => (
                         <Sppu_Course_Card course={course} key={i} Height={'h-[250px]'} />
                     ))}
