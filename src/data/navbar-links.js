@@ -8,10 +8,6 @@ export const NavbarLinks = [
     // path: '/catalog',
   },
   {
-    title: "SPPU Syllabus",
-    path : "/sppu-syllabus",
-  },
-  {
     title: "About Us",
     path: "/about",
   },
@@ -20,3 +16,4 @@ export const NavbarLinks = [
     path: "/contact",
   },
 ];
+// {title: "SPPU Syllabus",path : "/sppu-syllabus",}
